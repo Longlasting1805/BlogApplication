@@ -11,21 +11,21 @@ class Post(models.Model):
                                null=True)
     author = models.CharField(max_length=100,
                               null=True)
+    comment = models.CharField(max_length=1000,
+                               null=True)
     date = models.DateTimeField(auto_now_add=True,
                                 null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.author
 
 
 class Comment(models.Model):
-    comment = models.CharField(max_length=300,
-                               blank=True)
-    post = models.ForeignKey(Post, max_length=200, null=True, on_delete=models.SET_NULL)
+    # comment = models.CharField(max_length=300,
+    #                            blank=True)
+    post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL, related_name='posts')
     date = models.DateTimeField(auto_now_add=True,
                                 null=True)
 
     def __str__(self):
-        return self.comment
-
-
+        return self.post
